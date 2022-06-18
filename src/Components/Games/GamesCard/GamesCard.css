@@ -1,0 +1,34 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+.card {
+    /* border: 5px solid black; */
+    margin: 5px;
+    height: 600px;
+    max-width: 400px;
+    margin: auto 20px;
+    overflow: hidden;
+
+    background-image: linear-gradient(to right, #982CCB, rgb(197, 130, 199));
+    color: white;
+    border-radius: 5px;
+}
+
+.imageDiv img {
+    width: 100%;
+    height: auto;
+}
+
+.container .contentsDiv {
+    margin-top: 30px;
+}
+
+.container .contentsDiv h1{
+    text-align: center;
+    margin: 5px auto;
+}
