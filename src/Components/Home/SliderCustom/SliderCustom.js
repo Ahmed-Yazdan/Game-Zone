@@ -1,41 +1,104 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState } from "react";
+import './SliderCustom.css'
 import { Swiper, SwiperSlide } from "swiper/react";
-import Certificate from '../Certificate/Certificate';
 import "swiper/css";
-import "swiper/css/navigation"
-// import Swiper core and required modules
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import Aos from "aos";
-import "aos/dist/aos.css";
-
-// install Swiper modules
-SwiperCore.use([Navigation, Pagination]);
+import "swiper/css/navigation";
+import { Navigation, Pagination, Autoplay } from "swiper";
 
 
-const SliderCustom = () => {
-
-    const [certificates, setCertificates] = useState([]);
-
-    useEffect(() => {
-        fetch('./certificates.json')
-            .then(res => res.json())
-            .then(data => setCertificates(data));
-    }, []);
-
-    useEffect(() => {
-        Aos.init();
-    }, []);
+const SliderCustom = (props) => {
+    const slides = props.slideData;
 
     return (
-        <div id='achievements' className='margin-top'>
-            <h1 className='mt-5 headings' data-aos="fade-up" data-aos-duration="1000">Achievements</h1>
-            <Swiper navigation={true} loop={true} pagination={{ "clickable": true }} className="mySwiper" data-aos="fade-right" data-aos-duration="2000">
+        <div>
+            <Swiper
+                slidesPerView={1}
+                loop={true}
+                pagination={{
+                    clickable: true,
+                }}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }}
+                modules={[Pagination, Autoplay]}
+                className="mySwiper"
+            >
                 {
-                    certificates.map(certificate => <SwiperSlide><Certificate certificate={certificate} key={certificate.id}></Certificate></SwiperSlide>)
+                    slides.map(slide => <SwiperSlide className="slide"><img src={slide.image} key={slide.id} /></SwiperSlide>)
                 }
             </Swiper>
-        </div >
+        </div>
     );
 };
 
 export default SliderCustom;
+
+
+/* 
+
+
+
+let slide = document.querySelectorAll('.content');
+    let current = 0;
+    const loopRunner = () => {
+        for (let i = 0; i < slide.length; i++) {
+            slide[i].style.display = 'none';
+        }
+    }
+
+    const next = () => {
+        loopRunner();
+        if (current === slide.length - 1) {
+            current = -1;
+        }
+        current++;
+
+        slide[current].style.display = 'block';
+    }
+
+    const handleArrow = () => {
+        loopRunner();
+        slide[current].style.display = 'block';
+    }
+    handleArrow();
+
+
+
+
+
+<div className="arrow left">
+                <FontAwesomeIcon icon={faArrowLeft} />
+            </div>
+            <div className='container'>
+                <div className='slider-image'>
+                    <img src="https://i.pinimg.com/564x/1f/79/ef/1f79ef9aba68b2fc4ee74279af4a0745.jpg" alt="" />
+                </div>
+                <div className="content">
+                    <div className="typography">
+                        <h1>Assassins Creed 4</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique ad veniam animi numquam totam excepturi nisi laudantium dignissimos nam deleniti.;D</p>
+                    </div>
+                    <div className="actions">
+                        <button className="slider-button">Buy now</button>
+                    </div>
+                </div>
+            </div>
+            <div className='container'>
+                <div className='slider-image'>
+                    <img src="https://i.pinimg.com/564x/1f/79/ef/1f79ef9aba68b2fc4ee74279af4a0745.jpg" alt="" />
+                </div>
+                <div className="content">
+                    <div className="typography">
+                        <h1>Assassins Creed 4</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique ad veniam animi numquam totam excepturi nisi laudantium dignissimos nam deleniti.;D</p>
+                    </div>
+                    <div className="actions">
+                        <button className="slider-button">Buy now</button>
+                    </div>
+                </div>
+            </div>
+            <div className="arrow right">
+                <FontAwesomeIcon icon={faArrowRight} />
+            </div>
+*/

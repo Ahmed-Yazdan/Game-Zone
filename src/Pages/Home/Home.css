@@ -1,0 +1,27 @@
+.games {
+    margin-top: -500px;
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+.button{
+    background-color: skyblue;
+    padding:15px 50px;
+    margin: 5px 10px;
+    border: transparent;
+    border-radius: 15px;
+    transition:all 0.35s;
+}
+.button:hover{
+    background-color: rgb(172, 85, 172);
+    color: white;
+}
+#button-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

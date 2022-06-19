@@ -40,6 +40,10 @@ a.active,a:hover{
     cursor:pointer;
     display: none;
 }
+.nav{
+    position: relative;
+    z-index: 1000;
+}
 
 
 /* Media Query */

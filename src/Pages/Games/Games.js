@@ -5,8 +5,10 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import { Box, Grid, Container } from '@mui/material';
 import NavbarCustom from '../../Components/Home/NavbarCustom/NavbarCustom';
 
-const Games = () => {
+const Games = (props) => {
 
+    const {itemCount, isNavbar} = props;
+    console.log(isNavbar)
     const [games, setGames] = useState([]);
 
     useEffect(() => {
@@ -14,18 +16,19 @@ const Games = () => {
             .then(res => res.json())
             .then(data => {
                 setGames(data);
-                console.log(data);
             })
     }, []);
 
     return (
         <div>
-            <NavbarCustom/>
+            {
+                isNavbar==true && <NavbarCustom/>
+            }
             <Box sx={{ flexGrow: 1 }}>
             <Container >
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {
-                        games.map(game => 
+                        games.slice(0, itemCount).map(game => 
                                 <GamesCard game={game} key={game.unique_id}/>
                         )
                     }
