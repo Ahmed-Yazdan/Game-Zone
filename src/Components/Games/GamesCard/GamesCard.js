@@ -1,12 +1,42 @@
+import { Grid } from '@mui/material';
 import React from 'react';
 import "./GamesCard.css";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const GamesCard = (props) => {
-    const {name} = props.game;
+    const { name, type, image_url, price } = props.game;
+
+    const perType = type.split(',');
+
     return (
-       <div>
-           <h1>{name}</h1>
-       </div>
+        <Grid item xs={4} sm={4} md={4}>
+            <Card>
+                <CardMedia
+                    component="img"
+                    sx={{ height: '300px' }}
+                    image={image_url}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {name}
+                    </Typography>
+                    <div className="types-container">
+                        {
+                            perType.map(value => <button className="types-button">{value}</button>)
+                        }
+                    </div>
+                </CardContent>
+                <CardActions>
+                    <button className="bottom-button" size="small">Details</button>
+                    <button className="bottom-button" size="small">Buy now ${price}</button>
+                </CardActions>
+            </Card>
+        </Grid>
     );
 };
 
