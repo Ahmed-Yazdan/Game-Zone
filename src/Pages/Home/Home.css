@@ -1,5 +1,5 @@
 .games {
-    margin-top: -500px;
+    margin-top: -400px;
     z-index: 1;
     position: absolute;
     display: flex;
@@ -11,7 +11,8 @@
 .button{
     background-color: skyblue;
     padding:15px 50px;
-    margin: 5px 10px;
+    margin:10px;
+    margin-top: 70px;
     border: transparent;
     border-radius: 15px;
     transition:all 0.35s;
@@ -24,4 +25,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.best{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+.best .typography{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    text-align: center;
+}
+.typography h1{
+    color: rgb(235, 80, 235);
+    font-weight: bolder;
+    font-size: 4rem;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+.typography p{
+    color: rgb(54, 54, 54);
+    margin-top: 10px;
+    font-size: 2rem;
 }

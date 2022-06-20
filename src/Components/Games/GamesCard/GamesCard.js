@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
-import React from 'react';
+import React, { useNavigate } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import "./GamesCard.css";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,9 +10,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 const GamesCard = (props) => {
-    const { name, type, image_url, price } = props.game;
+    const { name, type, image_url, price, id, unique_id } = props.game;
+    const showButton = props.showButton;
 
     const perType = type.split(',');
+
+    const url = `/purchase/:${unique_id}`;
+
+    // const handleOnClick = (data) => {
+
+    // }
 
     return (
         <Grid item xs={4} sm={4} md={4}>
@@ -31,10 +39,16 @@ const GamesCard = (props) => {
                         }
                     </div>
                 </CardContent>
-                <CardActions>
-                    <button className="bottom-button" size="small">Details</button>
-                    <button className="bottom-button" size="small">Buy now ${price}</button>
-                </CardActions>
+                {
+                    showButton == true ?
+                        <CardActions>
+                            <Link to={url}>
+                                <button className="bottom-button" size="small">Buy now ${price}</button>
+                            </Link>
+                        </CardActions>
+                        :
+                        null
+                }
             </Card>
         </Grid>
     );

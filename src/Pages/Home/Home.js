@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import NavbarCustom from '../../Components/Home/NavbarCustom/NavbarCustom';
+import Rating from '../../Components/Home/Rating/Rating';
 import SliderCustom from '../../Components/Home/SliderCustom/SliderCustom';
 import Games from '../Games/Games';
 import "./Home.css";
@@ -23,12 +24,13 @@ const Home = () => {
                 <NavbarCustom />
                 <SliderCustom style={{ width: '100%', height: '100vh' }} slideData={slides} />
                 <div className="games">
-                    <Games isNavbar={false} itemCount={3} />
+                    <Games showButtons={false} isNavbar={false} itemCount={3} />
                 </div>
             </div>
             <div id='button-bottom'>
                 <button className='button'>See All</button>
             </div>
+            <Rating/>
         </div>
     );
 };

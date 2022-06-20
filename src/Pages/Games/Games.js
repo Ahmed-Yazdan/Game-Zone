@@ -7,8 +7,7 @@ import NavbarCustom from '../../Components/Home/NavbarCustom/NavbarCustom';
 
 const Games = (props) => {
 
-    const {itemCount, isNavbar} = props;
-    console.log(isNavbar)
+    const { itemCount, isNavbar, showButton } = props;
     const [games, setGames] = useState([]);
 
     useEffect(() => {
@@ -22,21 +21,21 @@ const Games = (props) => {
     return (
         <div>
             {
-                isNavbar==true && <NavbarCustom/>
+                isNavbar == true && <NavbarCustom />
             }
             <Box sx={{ flexGrow: 1 }}>
-            <Container >
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    {
-                        games.slice(0, itemCount).map(game => 
-                                <GamesCard game={game} key={game.unique_id}/>
-                        )
-                    }
-                </Grid>
-            </Container>
-        </Box>
+                <Container >
+                    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                        {
+                            games.slice(0, itemCount).map(game =>
+                                <GamesCard game={game} key={game.unique_id} showButton={showButton} />
+                            )
+                        }
+                    </Grid>
+                </Container>
+            </Box>
         </div>
-        
+
     );
 };
 
