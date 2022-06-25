@@ -1,6 +1,6 @@
-import { Grid } from '@mui/material';
-import React, { useNavigate } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Box, Grid, Modal } from '@mui/material';
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import "./GamesCard.css";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,53 +8,120 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import useAuth from '../../../hooks/useAuth';
 
 const GamesCard = (props) => {
-    const { name, type, image_url, price, id, unique_id } = props.game;
+    const { name, type, image_url, price, unique_id, _id, description } = props.game;
     const showButton = props.showButton;
-
     const perType = type.split(',');
+    const { email } = useAuth().user;
+    const urlForCart = `/cart/:${email}`;
+    const urlForDetails = `/games/:${unique_id}`;
 
-    const url = `/purchase/:${unique_id}`;
+    const handleAddToCart = (data) => {
+        const gameDetails = {
+            name: name,
+            price: price,
+            unique_id: unique_id,
+            email:email,
+            gameId: _id
+        };
+        const url = `http://localhost:5000/cart?email=${email}`;
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(gameDetails)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId)
+                    alert(`added ${name} to cart successfully`);
+            });
+    };
 
-    // const handleOnClick = (data) => {
-
-    // }
-
-    return (
-        <Grid item xs={4} sm={4} md={4}>
-            <Card>
-                <CardMedia
-                    component="img"
-                    sx={{ height: '300px' }}
-                    image={image_url}
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {name}
-                    </Typography>
-                    <div className="types-container">
-                        {
-                            perType.map(value => <button className="types-button">{value}</button>)
-                        }
-                    </div>
-                </CardContent>
-                {
-                    showButton == true ?
-                        <CardActions>
-                            <Link to={url}>
-                                <button className="bottom-button" size="small">Buy now ${price}</button>
-                            </Link>
-                        </CardActions>
-                        :
-                        null
-                }
-            </Card>
-        </Grid>
-    );
+// Modal Things
+const [open, setOpen] = React.useState(false);
+const handleOpen = () => setOpen(true);
+const handleClose = () => setOpen(false);
+const styleForModal = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
 };
 
+return (
+    <Grid item xs={4} sm={4} md={4} className='games-card'>
+        <Card>
+            <CardMedia
+                component="img"
+                sx={{ height: '300px' }}
+                image={image_url}
+            />
+            <CardContent>
+                <Typography id='game-name' gutterBottom variant="h5" component="div">
+                    {name}
+                </Typography>
+                <Typography sx={{ color: 'teal' }} gutterBottom variant="h6" component="div">
+                    Price: ${price}
+                </Typography>
+                <div className="types-container">
+                    {
+                        perType.map(value => <button className="types-button">{value}</button>)
+                    }
+                </div>
+            </CardContent>
+            {
+                showButton == true ?
+                    <CardActions>
+                        <Button variant='small' onClick={handleAddToCart} className="bottom-button">Add to cart</Button>
+                        <Button variant='small' onClick={handleOpen} className="bottom-button" >Details</Button>
+                    </CardActions>
+                    :
+                    null
+            }
+        </Card>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            className='modal'
+        >
+            <Box sx={styleForModal}>
+                <Typography align='center' id="modal-modal-title" variant="h6" component="h2">
+                    {name}
+                </Typography>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Tags: {
+                        perType.map(type => <h5>{type}</h5>)
+                    }
+                </Typography>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Price: ${price}
+                </Typography>
+                <Typography align='center' id="modal-modal-description" sx={{ mt: 2, mb:1 }}>
+                    {description && description}
+                </Typography>
+                <div>
+                    <Button onClick={handleAddToCart} className='modal-button'>Add to cart</Button>
+                </div>
+            </Box>
+        </Modal>
+    </Grid>
+);
+};
 export default GamesCard;
+
+//  image_url
 
 
 

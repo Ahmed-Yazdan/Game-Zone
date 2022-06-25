@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 import NavbarCustom from '../../Components/Home/NavbarCustom/NavbarCustom';
 import Rating from '../../Components/Home/Rating/Rating';
 import SliderCustom from '../../Components/Home/SliderCustom/SliderCustom';
@@ -22,15 +23,15 @@ const Home = () => {
         <div className='home'>
             <div>
                 <NavbarCustom />
-                <SliderCustom style={{ width: '100%', height: '100vh' }} slideData={slides} />
+                <SliderCustom style={{ width: '100%', height: '100vh' }} slideData={slides} key={slides.id} />
                 <div className="games">
                     <Games showButtons={false} isNavbar={false} itemCount={3} />
                 </div>
             </div>
             <div id='button-bottom'>
-                <button className='button'>See All</button>
+                <Button component={Link} to='/games' className='button'>See All</Button>
             </div>
-            <Rating/>
+            <Rating />
         </div>
     );
 };

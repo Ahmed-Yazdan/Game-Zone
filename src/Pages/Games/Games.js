@@ -11,7 +11,7 @@ const Games = (props) => {
     const [games, setGames] = useState([]);
 
     useEffect(() => {
-        fetch('data.json')
+        fetch('http://localhost:5000/games')
             .then(res => res.json())
             .then(data => {
                 setGames(data);
@@ -19,7 +19,7 @@ const Games = (props) => {
     }, []);
 
     return (
-        <div>
+        <div className='Games'>
             {
                 isNavbar == true && <NavbarCustom />
             }

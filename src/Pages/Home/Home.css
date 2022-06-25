@@ -1,39 +1,46 @@
-.games {
-    margin-top: -400px;
-    z-index: 1;
-    position: absolute;
+.home .games {
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     width: 100%;
 }
-.button{
-    background-color: skyblue;
+.home .button{
+    background-color: rgb(255, 255, 255);
     padding:15px 50px;
     margin:10px;
     margin-top: 70px;
-    border: transparent;
+    border: 1px solid black;
     border-radius: 15px;
     transition:all 0.35s;
+    color: rgb(0, 0, 0);
 }
-.button:hover{
-    background-color: rgb(172, 85, 172);
-    color: white;
+.home .button:hover{
+    color: rgb(255, 255, 255);
+    border:1px solid rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
 }
-#button-bottom{
+
+
+
+
+.home .button:hover{
+    border: 1px solid white;
+}
+.home #button-bottom{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.best{
+.home .best{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 50px;
 }
-.best .typography{
+.home .best .typography{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,13 +48,13 @@
     width: 75%;
     text-align: center;
 }
-.typography h1{
+.home .typography h1{
     color: rgb(235, 80, 235);
     font-weight: bolder;
     font-size: 4rem;
     border-bottom: 1px solid rgb(0, 0, 0);
 }
-.typography p{
+.home .typography p{
     color: rgb(54, 54, 54);
     margin-top: 10px;
     font-size: 2rem;
